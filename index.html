@@ -111,16 +111,31 @@ footer{
  padding:15px;
  display:none;
 }
+#hero .glitch{
+ animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-12px)}
+}
+
+
 </style>
 </head>
 
 <body>
 
 <header>
- <div class="glitch" data-text="FREE MEDIA">Dirkx Techniek</div>
+ <h1>Dirkx Techniek</h1>
  <p>Metal · Systems · Economy</p>
  <p class="bolt">🔩</p>
 </header>
+
+<section id="hero">
+ <div class="glitch" data-text="FREE MEDIA">FREE MEDIA</div>
+</section>
+
 
 <section id="tech">
 <h2>Terminal</h2>
