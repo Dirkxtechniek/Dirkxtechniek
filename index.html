@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>DIRKX Techniek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+ --accent:#00e0ff;
+ --green:#00ff88;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background:#0b0b0b;
+ color:#e6e6e6;
+ font-family:Consolas,monospace;
+}
+header{
+ padding:70px 20px;
+ text-align:center;
+ position:relative;
+}
+.glitch{
+ font-size:2.6rem;
+ position:relative;
+}
+.glitch::before,.glitch::after{
+ content:attr(data-text);
+ position:absolute;
+ left:0;
+}
+.glitch::before{
+ color:#0ff;
+ animation:glitch 2s infinite;
+}
+.glitch::after{
+ color:#f0f;
+ animation:glitch 1.5s infinite reverse;
+}
+@keyframes glitch{
+ 0%{clip-path:inset(0 0 90% 0)}
+ 50%{clip-path:inset(40% 0 20% 0)}
+ 100%{clip-path:inset(0 0 90% 0)}
+}
+
+nav{
+ display:flex;
+ justify-content:center;
+ gap:20px;
+ border-top:1px solid #222;
+ border-bottom:1px solid #222;
+ padding:15px;
+}
+nav a{color:#aaa;text-decoration:none}
+
+section{
+ max-width:1000px;
+ margin:auto;
+ padding:60px 20px;
+}
+h2{
+ border-left:4px solid var(--accent);
+ padding-left:10px;
+ margin-bottom:20px;
+}
+
+.card{
+ background:#141414;
+ border:1px solid #222;
+ padding:20px;
+}
+
+#terminal{
+ background:black;
+ border:1px solid var(--accent);
+ padding:20px;
+}
+#out{min-height:120px}
+#in{
+ width:100%;
+ background:black;
+ color:var(--green);
+ border:none;
+ outline:none;
+}
+
+canvas{
+ background:#111;
+ border:1px solid #222;
+ width:100%;
+ height:200px;
+}
+
+#vault,#deepvault{display:none}
+
+footer{
+ border-top:1px solid #222;
+ text-align:center;
+ padding:30px;
+ color:#555;
+}
+
+.bolt{cursor:pointer}
+.achievement{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#000;
+ border:1px solid var(--green);
+ padding:15px;
+ display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="glitch" data-text="FREE MEDIA">Dirkx Techniek</div>
+ <p>Metal · Systems · Economy</p>
+ <p class="bolt">🔩</p>
+</header>
+
+<section id="tech">
+<h2>Terminal</h2>
+<div id="terminal">
+<div id="out">> system online</div>
+<input id="in" placeholder="command..." />
+</div>
+</section>
+
+<section id="vault">
+<h2>VAULT</h2>
+<ul>
+<li><a href="https://fmhy.net" target="_blank">FREE MEDIA HECK YEAH</a></li>
+</ul>
+</section>
+
+<section id="deepvault">
+<h2>DEEP VAULT</h2>
+<p>Clearance: INDUSTRIAL CORE</p>
+<ul>
+<li><a href="https://arte.tv" target="_blank">ARTE</a></li>
+</ul>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Zakelijk samenwerken? Neem contact op.</p>
+</section>
+
+<footer id="footer">
+Clearance level: STANDARD
+</footer>
+
+<div class="achievement" id="ach">
+🏆 Achievement unlocked
+</div>
+
+<script>
+/* ===== STATE ===== */
+let clearance=0, bolt=0;
+
+/* ===== TERMINAL ===== */
+const input=document.getElementById("in");
+const out=document.getElementById("out");
+const vault=document.getElementById("vault");
+const deep=document.getElementById("deepvault");
+const footer=document.getElementById("footer");
+
+function log(t){out.innerHTML+="<br>"+t}
+
+input.addEventListener("keydown",e=>{
+if(e.key==="Enter"){
+let c=input.value.toLowerCase();
+log("> "+c);
+
+if(c==="unlock"){vault.style.display="block";clearance=1;footer.textContent="Clearance level: VAULT"}
+else if(c==="deepvault" && clearance>=1){deep.style.display="block";clearance=2;footer.textContent="Clearance level: CORE"}
+else if(c==="clearance"){log("level: "+clearance)}
+else log("unknown command");
+input.value="";
+}
+});
+
+/* ===== KONAMI ===== */
+let k=[];
+const konami="arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba";
+addEventListener("keydown",e=>{
+k.push(e.key.toLowerCase());
+if(k.join("").includes(konami)){
+vault.style.display=deep.style.display="block";
+footer.textContent="Clearance level: GODMODE";
+achievement("Godmode unlocked");
+k=[];
+}
+});
+
+/* ===== BOLT ===== */
+document.querySelector(".bolt").onclick=()=>{
+bolt++;
+if(bolt>=5){
+vault.style.display="block";
+achievement("Hidden mechanic found");
+}
+};
+
+/* ===== ACHIEVEMENT ===== */
+function achievement(t){
+const a=document.getElementById("ach");
+a.textContent="🏆 "+t;
+a.style.display="block";
+setTimeout(()=>a.style.display="none",3000);
+}
+
+</script>
+
+</body>
+</html>
