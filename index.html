@@ -120,6 +120,19 @@ footer{
  50%{transform:translateY(-12px)}
 }
 
+let pressTimer;
+
+const boltEl = document.querySelector(".bolt");
+
+boltEl.addEventListener("touchstart", ()=>{
+  pressTimer = setTimeout(()=>{
+    vault.style.display = deep.style.display = "block";
+    footer.textContent = "Clearance level: GODMODE";
+    achievement("Godmode unlocked");
+  }, 5000);
+});
+
+boltEl.addEventListener("touchend", ()=>clearTimeout(pressTimer));
 
 </style>
 </head>
