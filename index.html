@@ -244,42 +244,6 @@ boltEl.addEventListener("touchstart", ()=>{
 
 boltEl.addEventListener("touchend", ()=>clearTimeout(pressTimer));
 
-
- /* ===== MOBILE GODMODE TOUCH CODE ===== */
-let touchSeq = [];
-const mobileCode = ["up","up","down","down","left","right","left","right","tap","tap"];
-
-document.addEventListener("touchstart", e => {
-  const x = e.touches[0].clientX;
-  const y = e.touches[0].clientY;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-
-  let dir = "tap";
-
-  if (y < h*0.25) dir = "up";
-  else if (y > h*0.75) dir = "down";
-  else if (x < w*0.25) dir = "left";
-  else if (x > w*0.75) dir = "right";
-
-  touchSeq.push(dir);
-  touchSeq = touchSeq.slice(-mobileCode.length);
-
-  if (touchSeq.join() === mobileCode.join()) {
-    vault.style.display = deep.style.display = "block";
-    footer.textContent = "Clearance level: GODMODE";
-    achievement("Godmode unlocked (mobile)");
-    touchSeq = [];
-  }
-});
-
- else if(c==="godmode"){
-  vault.style.display=deep.style.display="block";
-  footer.textContent="Clearance level: GODMODE";
-  achievement("Godmode unlocked");
-}
-
-
 </script>
 
 </body>
