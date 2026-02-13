@@ -154,7 +154,7 @@ outline: none;
 font-family: Consolas, monospace;
 }
 
-.ticker-search button {
+.ticker-search button, .preset-btn {
 background: var(--accent);
 color: #000;
 border: none;
@@ -165,8 +165,23 @@ font-weight: bold;
 transition: all 0.3s;
 }
 
-.ticker-search button:hover {
+.ticker-search button:hover, .preset-btn:hover {
 background: var(--green);
+}
+
+.preset-btn {
+padding: 8px 16px;
+background: #141414;
+border: 1px solid #333;
+color: var(--accent);
+font-size: 0.9rem;
+}
+
+.preset-btns {
+display: flex;
+gap: 10px;
+margin-bottom: 15px;
+flex-wrap: wrap;
 }
 
 .crypto-grid {
@@ -338,16 +353,36 @@ color: var(--accent);
 <span id="lastUpdate" style="color:#666;font-size:0.85rem"></span>
 </div>
 <div class="ticker-search">
-<input id="cryptoSearch" placeholder="Zoek token (bijv. SOL, ETH, BTC)" />
+<input id="cryptoSearch" placeholder="Zoek tokens (gescheiden met komma's: BTC,ETH,SOL)" />
 <button onclick="searchCrypto()">SCAN</button>
 </div>
-<div class="quick-picks">
-<span class="quick-pick" onclick="quickSearch('SOL')">SOL</span>
-<span class="quick-pick" onclick="quickSearch('ETH')">ETH</span>
-<span class="quick-pick" onclick="quickSearch('BTC')">BTC</span>
-<span class="quick-pick" onclick="quickSearch('USDC')">USDC</span>
-<span class="quick-pick" onclick="quickSearch('PEPE')">PEPE</span>
+
+<!-- Preset Buttons -->
+<div class="preset-btns">
+<button class="preset-btn" onclick="loadPreset('top')">📊 TOP 20</button>
+<button class="preset-btn" onclick="loadPreset('meme')">🐸 MEME</button>
+<button class="preset-btn" onclick="loadPreset('defi')">💎 DEFI</button>
+<button class="preset-btn" onclick="loadPreset('layer1')">⛓️ L1</button>
+<button class="preset-btn" onclick="loadPreset('layer2')">🔗 L2</button>
+<button class="preset-btn" onclick="loadPreset('ai')">🤖 AI</button>
 </div>
+
+<!-- Quick Picks -->
+<div class="quick-picks">
+<span class="quick-pick" onclick="quickSearch('BTC')">BTC</span>
+<span class="quick-pick" onclick="quickSearch('ETH')">ETH</span>
+<span class="quick-pick" onclick="quickSearch('SOL')">SOL</span>
+<span class="quick-pick" onclick="quickSearch('BNB')">BNB</span>
+<span class="quick-pick" onclick="quickSearch('XRP')">XRP</span>
+<span class="quick-pick" onclick="quickSearch('ADA')">ADA</span>
+<span class="quick-pick" onclick="quickSearch('DOGE')">DOGE</span>
+<span class="quick-pick" onclick="quickSearch('PEPE')">PEPE</span>
+<span class="quick-pick" onclick="quickSearch('SHIB')">SHIB</span>
+<span class="quick-pick" onclick="quickSearch('AVAX')">AVAX</span>
+<span class="quick-pick" onclick="quickSearch('MATIC')">MATIC</span>
+<span class="quick-pick" onclick="quickSearch('LINK')">LINK</span>
+</div>
+
 <div id="cryptoFeed" class="crypto-grid">
 <div class="ticker-loading">
 <div class="spinner"></div>
@@ -383,13 +418,15 @@ color: var(--accent);
 </section>
 
 <section id="contact">
-<h2>System Status</h2>
-<p>> Uptime: ∞</p>
-<p>> Censorship: 0%</p>
-<p>> Freedom Index: MAX</p>
-<p style="margin-top:15px; color:#666; font-size:0.9rem">
-"The best way to predict the future is to build it."<br>
-Keep the internet weird. Keep it free.
+<h2>Transmission End</h2>
+<p>> Connection established: 127.0.0.1</p>
+<p>> Packets sent: ∞ | Packets received: ∞</p>
+<p>> Trackers blocked: ALL</p>
+<p style="margin-top:20px; color:var(--accent); font-size:1.1rem">
+"The net interprets censorship as damage<br>and routes around it."
+</p>
+<p style="margin-top:10px; color:#666; font-size:0.85rem">
+— John Gilmore, 1993
 </p>
 </section>
 
@@ -409,7 +446,7 @@ let clearance=0, bolt=0;
 const cryptoFeed = document.getElementById('cryptoFeed');
 const lastUpdate = document.getElementById('lastUpdate');
 
-async function fetchCryptoData(query = 'SOL,ETH,BTC') {
+async function fetchCryptoData(query = 'BTC,ETH,SOL,BNB,XRP,ADA,AVAX,DOGE,MATIC,DOT,LINK,UNI,ATOM,LTC,NEAR,PEPE,SHIB,ARB,OP,AAVE') {
    try {
        const searches = query.split(',').map(q => q.trim());
        cryptoFeed.innerHTML = '<div class="ticker-loading"><div class="spinner"></div><p style="margin-top:10px">Laden...</p></div>';
@@ -519,14 +556,43 @@ function quickSearch(symbol) {
    fetchCryptoData(symbol);
 }
 
+// Preset lijsten voor verschillende categorieën
+function loadPreset(preset) {
+   let coins = '';
+   switch(preset) {
+       case 'top':
+           coins = 'BTC,ETH,SOL,BNB,XRP,ADA,AVAX,DOGE,MATIC,DOT,LINK,UNI,ATOM,LTC,NEAR';
+           break;
+       case 'defi':
+           coins = 'UNI,AAVE,CRV,COMP,MKR,SNX,SUSHI,YFI,BAL,1INCH';
+           break;
+       case 'meme':
+           coins = 'DOGE,SHIB,PEPE,FLOKI,BONK,WIF,MEME,WOJAK,TURBO,BRETT';
+           break;
+       case 'layer1':
+           coins = 'ETH,SOL,AVAX,NEAR,ATOM,FTM,ALGO,ONE,ROSE,EGLD';
+           break;
+       case 'layer2':
+           coins = 'MATIC,ARB,OP,IMX,LRC,METIS,BOBA,MINA';
+           break;
+       case 'ai':
+           coins = 'FET,AGIX,RNDR,OCEAN,NMR,GRT,AIOZ,PHB';
+           break;
+       default:
+           coins = 'BTC,ETH,SOL,BNB,XRP,ADA,AVAX,DOGE,MATIC,DOT,LINK,UNI,ATOM,LTC,NEAR,PEPE,SHIB,ARB,OP,AAVE';
+   }
+   document.getElementById('cryptoSearch').value = coins;
+   fetchCryptoData(coins);
+}
+
 // Auto-refresh elke 30 seconden
 setInterval(() => {
    const currentSearch = document.getElementById('cryptoSearch').value.trim();
-   fetchCryptoData(currentSearch || 'SOL,ETH,BTC');
+   fetchCryptoData(currentSearch || 'BTC,ETH,SOL,BNB,XRP,ADA,AVAX,DOGE,MATIC,DOT,LINK,UNI,ATOM,LTC,NEAR,PEPE,SHIB,ARB,OP,AAVE');
 }, 30000);
 
-// Initiële load
-fetchCryptoData('SOL,ETH,BTC');
+// Initiële load met TOP 20
+fetchCryptoData('BTC,ETH,SOL,BNB,XRP,ADA,AVAX,DOGE,MATIC,DOT,LINK,UNI,ATOM,LTC,NEAR,PEPE,SHIB,ARB,OP,AAVE');
 
 // Enter key support voor zoeken
 document.getElementById('cryptoSearch').addEventListener('keydown', e => {
