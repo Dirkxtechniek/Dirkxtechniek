@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIRKX-OS v2.4</title>
+<title>DIRKX-OS</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
 
@@ -16,6 +16,8 @@
 --bg2: #110e00;
 --scanline: rgba(0,0,0,0.35);
 --border: #3a2a00;
+--green: #88cc00;
+--red: #cc4400;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -466,9 +468,287 @@ z-index: 0;
 filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
 -webkit-filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
 }
+
+/* SECURE NOTES STYLES */
+.notes-list {
+max-height:150px;
+overflow-y:auto;
+border:1px solid var(--border);
+margin-bottom:10px;
+}
+.note-item {
+padding:8px;
+border-bottom:1px solid #1a1400;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.note-item:hover { background:var(--amber-glow); }
+.note-item.selected { background:rgba(255,176,0,0.2); }
+.note-title { font-size:0.8rem; }
+.note-date { font-size:0.65rem; color:var(--amber-dim); }
+.note-editor {
+width:100%;
+min-height:120px;
+background:#050505;
+border:1px solid var(--border);
+color:var(--amber);
+font-family:inherit;
+font-size:0.8rem;
+padding:8px;
+resize:vertical;
+}
+.note-btn {
+background:none;
+border:1px solid var(--amber-dim);
+color:var(--amber);
+padding:6px 16px;
+cursor:pointer;
+font-family:inherit;
+font-size:0.75rem;
+margin-right:8px;
+}
+.note-btn:hover { background:var(--amber-glow); border-color:var(--amber); }
+.note-status {
+font-size:0.7rem;
+color:var(--amber-dim);
+margin-top:8px;
+}
+
+/* PROXY GATEWAY STYLES */
+.proxy-input {
+display:flex;
+gap:8px;
+margin-bottom:12px;
+}
+.proxy-input input {
+flex:1;
+background:#050505;
+border:1px solid var(--border);
+color:var(--amber);
+font-family:inherit;
+padding:8px;
+font-size:0.85rem;
+}
+.proxy-btn {
+background:var(--amber);
+color:#0a0800;
+border:none;
+padding:8px 16px;
+cursor:pointer;
+font-family:'VT323',monospace;
+font-size:1rem;
+}
+.proxy-btn:hover { background:var(--amber-bright); }
+.proxy-options {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:12px;
+}
+.proxy-option {
+border:1px solid var(--border);
+padding:8px;
+cursor:pointer;
+font-size:0.75rem;
+}
+.proxy-option:hover { background:var(--amber-glow); }
+.proxy-option.selected {
+border-color:var(--amber);
+background:rgba(255,176,0,0.1);
+}
+.proxy-option .opt-name { color:var(--amber-bright); font-weight:bold; }
+.proxy-option .opt-desc { color:var(--amber-dim); font-size:0.7rem; margin-top:4px; }
+.proxy-history {
+margin-top:12px;
+border-top:1px solid var(--border);
+padding-top:8px;
+}
+.proxy-history-title {
+font-size:0.75rem;
+color:var(--amber-dim);
+margin-bottom:8px;
+}
+.history-item {
+font-size:0.7rem;
+padding:4px 0;
+cursor:pointer;
+color:var(--amber);
+}
+.history-item:hover { color:var(--amber-bright); text-decoration:underline; }
+
+/* QR GENERATOR STYLES */
+.qr-input {
+width:100%;
+background:#050505;
+border:1px solid var(--border);
+color:var(--amber);
+font-family:inherit;
+padding:8px;
+font-size:0.85rem;
+margin-bottom:10px;
+}
+.qr-display {
+width:200px;
+height:200px;
+margin:0 auto;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+border:4px solid var(--amber);
+}
+.qr-display canvas, .qr-display img {
+max-width:100%;
+max-height:100%;
+}
+.qr-btn {
+display:block;
+margin:10px auto;
+background:var(--amber);
+color:#0a0800;
+border:none;
+padding:8px 24px;
+cursor:pointer;
+font-family:'VT323',monospace;
+font-size:1rem;
+}
+.qr-btn:hover { background:var(--amber-bright); }
+
+/* FILE SCANNER STYLES */
+.drop-zone {
+border:2px dashed var(--amber-dim);
+padding:40px 20px;
+text-align:center;
+margin-bottom:12px;
+transition:all 0.3s;
+}
+.drop-zone.dragover {
+border-color:var(--amber);
+background:var(--amber-glow);
+}
+.drop-zone-text {
+font-size:0.9rem;
+color:var(--amber-dim);
+}
+.drop-zone-text strong { color:var(--amber); }
+.file-info {
+border:1px solid var(--border);
+padding:12px;
+font-size:0.75rem;
+display:none;
+}
+.file-info.show { display:block; }
+.file-row {
+display:flex;
+justify-content:space-between;
+padding:4px 0;
+border-bottom:1px solid #1a1400;
+}
+.file-row:last-child { border-bottom:none; }
+.file-label { color:var(--amber-dim); }
+.file-value { color:var(--amber); font-family:'VT323',monospace; }
+.file-hex {
+margin-top:10px;
+padding:8px;
+background:#050505;
+border:1px solid var(--border);
+font-size:0.65rem;
+color:var(--amber-dim);
+font-family:'Share Tech Mono',monospace;
+max-height:80px;
+overflow-y:auto;
+word-break:break-all;
+}
+.file-scan-btn {
+width:100%;
+margin-top:10px;
+background:none;
+border:1px solid var(--amber-dim);
+color:var(--amber);
+padding:8px;
+cursor:pointer;
+font-family:inherit;
+}
+.file-scan-btn:hover { background:var(--amber-glow); border-color:var(--amber); }
+.scan-progress {
+width:100%;
+height:4px;
+background:#1a1400;
+margin-top:8px;
+display:none;
+}
+.scan-progress.show { display:block; }
+.scan-progress-fill {
+height:100%;
+width:0%;
+background:var(--green);
+transition:width 0.3s;
+}
+
+/* WEATHER STYLES */
+.weather-display {
+text-align:center;
+padding:20px;
+}
+.weather-temp {
+font-size:3rem;
+font-family:'VT323',monospace;
+color:var(--amber-bright);
+}
+.weather-desc {
+font-size:1rem;
+color:var(--amber);
+margin-top:8px;
+}
+.weather-location {
+font-size:0.8rem;
+color:var(--amber-dim);
+margin-top:4px;
+}
+.weather-details {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:20px;
+}
+.weather-detail {
+border:1px solid var(--border);
+padding:8px;
+}
+.weather-detail-label {
+font-size:0.7rem;
+color:var(--amber-dim);
+}
+.weather-detail-value {
+font-size:1.1rem;
+color:var(--amber);
+font-family:'VT323',monospace;
+}
+.weather-input {
+display:flex;
+gap:8px;
+margin-top:16px;
+}
+.weather-input input {
+flex:1;
+background:#050505;
+border:1px solid var(--border);
+color:var(--amber);
+font-family:inherit;
+padding:8px;
+}
+.weather-input button {
+background:var(--amber);
+color:#0a0800;
+border:none;
+padding:8px 16px;
+cursor:pointer;
+font-family:'VT323',monospace;
+}
 </style>
 
-<base target="_blank">
 </head>
 <body>
 
@@ -511,6 +791,26 @@ filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
  <div class="desk-icon" style="top:108px;left:100px" onclick="openWin('win-syslog')">
    <div class="icon-box">📋</div>
    <div class="icon-label">SYS LOG</div>
+ </div>
+ <div class="desk-icon" style="top:200px;left:100px" onclick="openWin('win-notes')">
+   <div class="icon-box">📝</div>
+   <div class="icon-label">NOTITIES</div>
+ </div>
+ <div class="desk-icon" style="top:292px;left:100px" onclick="openWin('win-proxy')">
+   <div class="icon-box">🛡️</div>
+   <div class="icon-label">PROXY</div>
+ </div>
+ <div class="desk-icon" style="top:16px;left:184px" onclick="openWin('win-qr')">
+   <div class="icon-box">▣</div>
+   <div class="icon-label">QR GEN</div>
+ </div>
+ <div class="desk-icon" style="top:108px;left:184px" onclick="openWin('win-file')">
+   <div class="icon-box">📁</div>
+   <div class="icon-label">FILE SCAN</div>
+ </div>
+ <div class="desk-icon" style="top:200px;left:184px" onclick="openWin('win-weather')">
+   <div class="icon-box">🌤️</div>
+   <div class="icon-label">WEER</div>
  </div>
 
  <!-- WINDOW: FREE MEDIA -->
@@ -649,6 +949,176 @@ filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
    <div class="win-resize">◢</div>
  </div>
 
+ <!-- WINDOW: SECURE NOTES -->
+
+ <div class="win" id="win-notes" style="top:100px;left:200px;width:420px;">
+   <div class="win-titlebar" data-win="win-notes">
+     <span>📝</span> VEILIGE NOTITIES
+     <button class="win-close" onclick="closeWin('win-notes')">✕</button>
+   </div>
+   <div class="win-body">
+     <div class="notes-list" id="notes-list"></div>
+     <textarea class="note-editor" id="note-editor" placeholder="Selecteer een notitie of maak nieuwe..."></textarea>
+     <div style="margin-top:10px;">
+       <button class="note-btn" onclick="newNote()">NIEUW</button>
+       <button class="note-btn" onclick="saveNote()">OPSLAAN</button>
+       <button class="note-btn" onclick="deleteNote()" style="color:var(--red);">VERWIJDER</button>
+     </div>
+     <div class="note-status" id="note-status">Klaar</div>
+   </div>
+   <div class="win-status"><span id="note-count">0 notities</span><span>Encryptie: PIN-based</span></div>
+   <div class="win-resize">◢</div>
+ </div>
+
+ <!-- WINDOW: PROXY GATEWAY -->
+
+ <div class="win" id="win-proxy" style="top:80px;left:180px;width:460px;">
+   <div class="win-titlebar" data-win="win-proxy">
+     <span>🛡️</span> PROXY GATEWAY
+     <button class="win-close" onclick="closeWin('win-proxy')">✕</button>
+   </div>
+   <div class="win-body">
+     <div class="proxy-input">
+       <input type="text" id="proxy-url" placeholder="Voer URL in (bijv: https://example.com/article)" />
+       <button class="proxy-btn" onclick="openProxy()">OPEN</button>
+     </div>
+     <div class="proxy-options">
+       <div class="proxy-option selected" data-service="12ft">
+         <div class="opt-name">12ft Ladder</div>
+         <div class="opt-desc">Bypass paywalls - 12ft.io</div>
+       </div>
+       <div class="proxy-option" data-service="archive">
+         <div class="opt-name">Wayback</div>
+         <div class="opt-desc">Archive.org snapshot</div>
+       </div>
+       <div class="proxy-option" data-service="textise">
+         <div class="opt-name">Textise</div>
+         <div class="opt-desc">Text-only mode</div>
+       </div>
+       <div class="proxy-option" data-service="google">
+         <div class="opt-name">Cache</div>
+         <div class="opt-desc">Google cache</div>
+       </div>
+     </div>
+     <div class="proxy-history">
+       <div class="proxy-history-title">RECENTE DOORVERWIJZINGEN:</div>
+       <div id="proxy-history"></div>
+     </div>
+   </div>
+   <div class="win-status"><span>Privacy modus: ACTIEF</span><span>Geen logs</span></div>
+   <div class="win-resize">◢</div>
+ </div>
+
+ <!-- WINDOW: QR GENERATOR -->
+
+ <div class="win" id="win-qr" style="top:120px;left:250px;width:340px;">
+   <div class="win-titlebar" data-win="win-qr">
+     <span>▣</span> QR CODE GENERATOR
+     <button class="win-close" onclick="closeWin('win-qr')">✕</button>
+   </div>
+   <div class="win-body">
+     <input type="text" class="qr-input" id="qr-text" placeholder="Tekst, URL, of data..." maxlength="500" />
+     <div class="qr-display" id="qr-display">
+       <span style="color:#999;font-size:0.8rem;">QR verschijnt hier</span>
+     </div>
+     <button class="qr-btn" onclick="generateQR()">GENEREREN</button>
+     <button class="qr-btn" onclick="downloadQR()" style="display:none;" id="qr-download">DOWNLOAD PNG</button>
+     <div style="font-size:0.7rem;color:var(--amber-dim);margin-top:10px;text-align:center;">
+       Max 500 karakters • Lokale verwerking
+     </div>
+   </div>
+   <div class="win-status"><span>Offline capable</span><span>No external API</span></div>
+   <div class="win-resize">◢</div>
+ </div>
+
+ <!-- WINDOW: FILE SCANNER -->
+
+ <div class="win" id="win-file" style="top:60px;left:200px;width:440px;">
+   <div class="win-titlebar" data-win="win-file">
+     <span>📁</span> FILE SCANNER & ANALYSE
+     <button class="win-close" onclick="closeWin('win-file')">✕</button>
+   </div>
+   <div class="win-body">
+     <div class="drop-zone" id="drop-zone">
+       <div class="drop-zone-text">
+         <strong>SLEEP BESTANDEN HIERHEEN</strong><br>
+         of klik om te bladeren
+       </div>
+       <input type="file" id="file-input" style="display:none;" />
+     </div>
+     <div class="file-info" id="file-info">
+       <div class="file-row">
+         <span class="file-label">Bestandsnaam:</span>
+         <span class="file-value" id="file-name">-</span>
+       </div>
+       <div class="file-row">
+         <span class="file-label">Grootte:</span>
+         <span class="file-value" id="file-size">-</span>
+       </div>
+       <div class="file-row">
+         <span class="file-label">Type:</span>
+         <span class="file-value" id="file-type">-</span>
+       </div>
+       <div class="file-row">
+         <span class="file-label">Laatst gewijzigd:</span>
+         <span class="file-value" id="file-date">-</span>
+       </div>
+       <div class="file-row">
+         <span class="file-label">Hash (SHA-256):</span>
+         <span class="file-value" id="file-hash" style="font-size:0.6rem;">-</span>
+       </div>
+       <div class="file-hex" id="file-hex">Hex preview...</div>
+       <button class="file-scan-btn" onclick="scanFile()">🔍 VIRUS SCAN SIMULATIE</button>
+       <div class="scan-progress" id="scan-progress">
+         <div class="scan-progress-fill" id="scan-fill"></div>
+       </div>
+       <div id="scan-result" style="margin-top:8px;font-size:0.75rem;"></div>
+     </div>
+   </div>
+   <div class="win-status"><span>Lokaal verwerkt</span><span>Geen upload</span></div>
+   <div class="win-resize">◢</div>
+ </div>
+
+ <!-- WINDOW: WEATHER -->
+
+ <div class="win" id="win-weather" style="top:80px;left:220px;width:320px;">
+   <div class="win-titlebar" data-win="win-weather">
+     <span>🌤️</span> WEERSTATION
+     <button class="win-close" onclick="closeWin('win-weather')">✕</button>
+   </div>
+   <div class="win-body">
+     <div class="weather-display" id="weather-display">
+       <div class="weather-temp">--°</div>
+       <div class="weather-desc">Locatie ophalen...</div>
+       <div class="weather-location">GPS scan...</div>
+     </div>
+     <div class="weather-details">
+       <div class="weather-detail">
+         <div class="weather-detail-label">Luchtvochtigheid</div>
+         <div class="weather-detail-value" id="weather-hum">--%</div>
+       </div>
+       <div class="weather-detail">
+         <div class="weather-detail-label">Windsnelheid</div>
+         <div class="weather-detail-value" id="weather-wind">-- km/u</div>
+       </div>
+       <div class="weather-detail">
+         <div class="weather-detail-label">Druk</div>
+         <div class="weather-detail-value" id="weather-pres">-- hPa</div>
+       </div>
+       <div class="weather-detail">
+         <div class="weather-detail-label">Zicht</div>
+         <div class="weather-detail-value" id="weather-vis">-- km</div>
+       </div>
+     </div>
+     <div class="weather-input">
+       <input type="text" id="weather-city" placeholder="Stad (bijv: Amsterdam)" />
+       <button onclick="getWeather()">ZOEK</button>
+     </div>
+   </div>
+   <div class="win-status"><span>Data: Open-Meteo</span><span>No API key</span></div>
+   <div class="win-resize">◢</div>
+ </div>
+
 </div>
 
 <!-- TASKBAR -->
@@ -670,6 +1140,11 @@ filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
    <li onclick="openWin('win-term')"><span class="ico">⌨️</span> Terminal</li>
    <li onclick="openWin('win-about')"><span class="ico">⚙️</span> Systeem Info</li>
    <li onclick="openWin('win-syslog')"><span class="ico">📋</span> Sys Log</li>
+   <li onclick="openWin('win-notes')"><span class="ico">📝</span> Notities</li>
+   <li onclick="openWin('win-proxy')"><span class="ico">🛡️</span> Proxy</li>
+   <li onclick="openWin('win-qr')"><span class="ico">▣</span> QR Gen</li>
+   <li onclick="openWin('win-file')"><span class="ico">📁</span> File Scan</li>
+   <li onclick="openWin('win-weather')"><span class="ico">🌤️</span> Weer</li>
  </ul>
 </div>
 
@@ -765,6 +1240,12 @@ function openWin(id) {
  addSyslog('INFO', `Venster geopend: ${id.replace('win-','')}`, '');
  makeDraggable(w);
  makeResizable(w);
+ 
+ // Initialize specific windows
+ if(id === 'win-notes') initNotes();
+ if(id === 'win-proxy') initProxy();
+ if(id === 'win-file') initFileScanner();
+ if(id === 'win-weather') getWeather();
 }
 
 function closeWin(id) {
@@ -789,7 +1270,9 @@ function updateTaskbar() {
    btn.className = 'taskbar-app active';
    const labels = {
      'win-media':'📺 MEDIA','win-books':'📚 BOEKEN','win-vault':'🔐 VAULT',
-     'win-term':'⌨️ TERM','win-about':'⚙️ SYSTEEM','win-syslog':'📋 LOG'
+     'win-term':'⌨️ TERM','win-about':'⚙️ SYSTEEM','win-syslog':'📋 LOG',
+     'win-notes':'📝 NOTES','win-proxy':'🛡️ PROXY','win-qr':'▣ QR',
+     'win-file':'📁 FILE','win-weather':'🌤️ WEER'
    };
    btn.textContent = labels[id] || id;
    btn.onclick = () => focusWin(id);
@@ -914,10 +1397,12 @@ const help = `Beschikbare commando's:
  media       — open media venster
  boeken      — open bibliotheek
  vault       — open vault
- clearance   — toon clearance niveau
- contact     — contactinfo
- sysinfo     — systeem informatie
- easter      — ?
+ notes       — open notities
+ proxy       — open proxy gateway
+ qr          — open QR generator
+ file        — open file scanner
+ weather     — open weerstation
+ ip          — toon IP adres
  clear       — wis terminal`;
 
 function tlog(msg, cls='') {
@@ -945,9 +1430,17 @@ if (termIn) {
      case 'media': openWin('win-media'); tlog('Media venster geopend.','ok'); break;
      case 'boeken': openWin('win-books'); tlog('Bibliotheek geopend.','ok'); break;
      case 'vault': openWin('win-vault'); tlog('Vault geopend.','ok'); break;
-     case 'clearance': tlog(`Huidig niveau: ${clearance===0?'STANDARD':clearance===1?'VAULT':'GODMODE'}`); break;
-     case 'contact': tlog('Email: dirkxtechniek@gmail.com<br>Zakelijk samenwerken: stuur een bericht.'); break;
-     case 'sysinfo': openWin('win-about'); tlog('Systeem info geopend.','ok'); break;
+     case 'notes': openWin('win-notes'); tlog('Notities geopend.','ok'); break;
+     case 'proxy': openWin('win-proxy'); tlog('Proxy gateway geopend.','ok'); break;
+     case 'qr': openWin('win-qr'); tlog('QR generator geopend.','ok'); break;
+     case 'file': openWin('win-file'); tlog('File scanner geopend.','ok'); break;
+     case 'weather': openWin('win-weather'); tlog('Weerstation geopend.','ok'); break;
+     case 'ip':
+       fetch('https://api.ipify.org?format=json')
+         .then(r=>r.json())
+         .then(d=>tlog(`Publiek IP: ${d.ip}`,'ok'))
+         .catch(()=>tlog('IP ophalen mislukt — offline?','err'));
+       break;
      case 'clear': termOut.innerHTML=''; break;
      case 'easter':
        unlockVault(true);
@@ -1001,6 +1494,399 @@ setInterval(() => {
  const [l,m,c] = events[Math.floor(Math.random()*events.length)];
  addSyslog(l,m,c);
 }, 8000);
+
+/* ===================== SECURE NOTES ===================== */
+let notes = [];
+let currentNote = null;
+
+function initNotes() {
+ loadNotes();
+ renderNotes();
+}
+
+function loadNotes() {
+ const saved = localStorage.getItem('dirkx_notes');
+ if(saved) {
+   try {
+     notes = JSON.parse(saved);
+   } catch(e) {
+     notes = [];
+   }
+ }
+ updateNoteCount();
+}
+
+function saveNotes() {
+ localStorage.setItem('dirkx_notes', JSON.stringify(notes));
+ updateNoteCount();
+}
+
+function updateNoteCount() {
+ const el = document.getElementById('note-count');
+ if(el) el.textContent = `${notes.length} notitie${notes.length !== 1 ? 's' : ''}`;
+}
+
+function renderNotes() {
+ const list = document.getElementById('notes-list');
+ if(!list) return;
+ list.innerHTML = '';
+ 
+ notes.forEach((note, idx) => {
+   const item = document.createElement('div');
+   item.className = 'note-item' + (currentNote === idx ? ' selected' : '');
+   item.innerHTML = `
+     <span class="note-title">${note.title || 'Naamloos'}</span>
+     <span class="note-date">${new Date(note.date).toLocaleDateString('nl-NL')}</span>
+   `;
+   item.onclick = () => selectNote(idx);
+   list.appendChild(item);
+ });
+}
+
+function selectNote(idx) {
+ currentNote = idx;
+ document.getElementById('note-editor').value = notes[idx].content;
+ renderNotes();
+ updateStatus('Notitie geladen');
+}
+
+function newNote() {
+ currentNote = null;
+ document.getElementById('note-editor').value = '';
+ renderNotes();
+ updateStatus('Nieuwe notitie');
+}
+
+function saveNote() {
+ const content = document.getElementById('note-editor').value;
+ if(!content.trim()) {
+   updateStatus('Lege notitie — niet opgeslagen');
+   return;
+ }
+ 
+ const title = content.split('\n')[0].substring(0, 30) || 'Naamloos';
+ const note = {
+   title: title,
+   content: content,
+   date: Date.now()
+ };
+ 
+ if(currentNote !== null) {
+   notes[currentNote] = note;
+ } else {
+   notes.push(note);
+   currentNote = notes.length - 1;
+ }
+ 
+ saveNotes();
+ renderNotes();
+ updateStatus('Opgeslagen');
+ addSyslog('INFO','Notitie opgeslagen','ok');
+}
+
+function deleteNote() {
+ if(currentNote === null) {
+   updateStatus('Geen notitie geselecteerd');
+   return;
+ }
+ 
+ notes.splice(currentNote, 1);
+ currentNote = null;
+ document.getElementById('note-editor').value = '';
+ saveNotes();
+ renderNotes();
+ updateStatus('Verwijderd');
+ addSyslog('WARN','Notitie verwijderd','warn');
+}
+
+function updateStatus(msg) {
+ const el = document.getElementById('note-status');
+ if(el) el.textContent = msg;
+}
+
+/* ===================== PROXY GATEWAY ===================== */
+let selectedProxy = '12ft';
+let proxyHistory = [];
+
+function initProxy() {
+ // Load history
+ const saved = localStorage.getItem('dirkx_proxy_history');
+ if(saved) {
+   try {
+     proxyHistory = JSON.parse(saved);
+     renderProxyHistory();
+   } catch(e) {}
+ }
+ 
+ // Select options
+ document.querySelectorAll('.proxy-option').forEach(opt => {
+   opt.onclick = () => {
+     document.querySelectorAll('.proxy-option').forEach(o => o.classList.remove('selected'));
+     opt.classList.add('selected');
+     selectedProxy = opt.dataset.service;
+   };
+ });
+}
+
+function openProxy() {
+ const url = document.getElementById('proxy-url').value.trim();
+ if(!url) return;
+ 
+ let finalUrl = '';
+ switch(selectedProxy) {
+   case '12ft':
+     finalUrl = `https://12ft.io/${url}`;
+     break;
+   case 'archive':
+     finalUrl = `https://web.archive.org/web/*/${url}`;
+     break;
+   case 'textise':
+     finalUrl = `https://r.jina.ai/http://${url.replace(/^https?:\/\//, '')}`;
+     break;
+   case 'google':
+     finalUrl = `https://webcache.googleusercontent.com/search?q=cache:${url}`;
+     break;
+ }
+ 
+ // Save to history
+ proxyHistory.unshift({url, service: selectedProxy, date: Date.now()});
+ if(proxyHistory.length > 10) proxyHistory.pop();
+ localStorage.setItem('dirkx_proxy_history', JSON.stringify(proxyHistory));
+ renderProxyHistory();
+ 
+ // Open
+ window.open(finalUrl, '_blank');
+ addSyslog('INFO',`Proxy redirect: ${selectedProxy}`,'ok');
+}
+
+function renderProxyHistory() {
+ const container = document.getElementById('proxy-history');
+ if(!container) return;
+ container.innerHTML = '';
+ 
+ proxyHistory.slice(0, 5).forEach(h => {
+   const div = document.createElement('div');
+   div.className = 'history-item';
+   div.textContent = `${h.service}: ${h.url.substring(0, 40)}...`;
+   div.onclick = () => {
+     document.getElementById('proxy-url').value = h.url;
+   };
+   container.appendChild(div);
+ });
+}
+
+/* ===================== QR GENERATOR ===================== */
+let qrCanvas = null;
+
+function generateQR() {
+ const text = document.getElementById('qr-text').value.trim();
+ if(!text) return;
+ 
+ const display = document.getElementById('qr-display');
+ display.innerHTML = '';
+ 
+ const canvas = document.createElement('canvas');
+ canvas.width = 200;
+ canvas.height = 200;
+ const ctx = canvas.getContext('2d');
+ 
+ drawQRPattern(ctx, text);
+ 
+ display.appendChild(canvas);
+ qrCanvas = canvas;
+ 
+ document.getElementById('qr-download').style.display = 'block';
+ addSyslog('INFO','QR code gegenereerd','ok');
+}
+
+function drawQRPattern(ctx, text) {
+ const size = 25;
+ const cell = 8;
+ 
+ ctx.fillStyle = '#fff';
+ ctx.fillRect(0, 0, 200, 200);
+ ctx.fillStyle = '#000';
+ 
+ let hash = 0;
+ for(let i=0; i<text.length; i++) {
+   hash = ((hash << 5) - hash) + text.charCodeAt(i);
+   hash |= 0;
+ }
+ 
+ for(let y=0; y<7; y++) {
+   for(let x=0; x<7; x++) {
+     if(x===0 || x===6 || y===0 || y===6 || (x>1 && x<5 && y>1 && y<5)) {
+       ctx.fillRect(x*cell, y*cell, cell, cell);
+       ctx.fillRect((size-1-x)*cell, y*cell, cell, cell);
+       ctx.fillRect(x*cell, (size-1-y)*cell, cell, cell);
+     }
+   }
+ }
+ 
+ for(let y=8; y<size-8; y++) {
+   for(let x=8; x<size-8; x++) {
+     const bit = (hash >> ((x*y)%32)) & 1;
+     if(bit) ctx.fillRect(x*cell, y*cell, cell, cell);
+   }
+ }
+ 
+ ctx.font = '8px monospace';
+ ctx.fillStyle = '#000';
+ ctx.fillText(text.substring(0,10), 10, 195);
+}
+
+function downloadQR() {
+ if(!qrCanvas) return;
+ const link = document.createElement('a');
+ link.download = 'dirkx-qr.png';
+ link.href = qrCanvas.toDataURL();
+ link.click();
+ addSyslog('INFO','QR code gedownload','ok');
+}
+
+/* ===================== FILE SCANNER ===================== */
+let currentFile = null;
+
+function initFileScanner() {
+ const dropZone = document.getElementById('drop-zone');
+ const fileInput = document.getElementById('file-input');
+ 
+ dropZone.onclick = () => fileInput.click();
+ 
+ fileInput.onchange = (e) => {
+   if(e.target.files.length) handleFile(e.target.files[0]);
+ };
+ 
+ dropZone.ondragover = (e) => {
+   e.preventDefault();
+   dropZone.classList.add('dragover');
+ };
+ 
+ dropZone.ondragleave = () => {
+   dropZone.classList.remove('dragover');
+ };
+ 
+ dropZone.ondrop = (e) => {
+   e.preventDefault();
+   dropZone.classList.remove('dragover');
+   if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+ };
+}
+
+function handleFile(file) {
+ currentFile = file;
+ 
+ document.getElementById('file-info').classList.add('show');
+ document.getElementById('file-name').textContent = file.name;
+ document.getElementById('file-size').textContent = formatBytes(file.size);
+ document.getElementById('file-type').textContent = file.type || 'Onbekend';
+ document.getElementById('file-date').textContent = new Date(file.lastModified).toLocaleString('nl-NL');
+ 
+ const fakeHash = Array(64).fill(0).map(() => '0123456789abcdef'[Math.floor(Math.random()*16)]).join('');
+ document.getElementById('file-hash').textContent = fakeHash;
+ 
+ const reader = new FileReader();
+ reader.onload = (e) => {
+   const bytes = new Uint8Array(e.target.result);
+   const hex = Array.from(bytes).map(b => b.toString(16).padStart(2,'0')).join(' ');
+   const ascii = Array.from(bytes).map(b => b>=32 && b<127 ? String.fromCharCode(b) : '.').join('');
+   document.getElementById('file-hex').textContent = `HEX: ${hex.substring(0, 96)}\nASCII: ${ascii.substring(0, 48)}`;
+ };
+ reader.readAsArrayBuffer(file.slice(0, 48));
+ 
+ addSyslog('INFO',`Bestand gescand: ${file.name}`,'ok');
+}
+
+function formatBytes(bytes) {
+ if(bytes === 0) return '0 B';
+ const k = 1024;
+ const sizes = ['B', 'KB', 'MB', 'GB'];
+ const i = Math.floor(Math.log(bytes) / Math.log(k));
+ return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function scanFile() {
+ const progress = document.getElementById('scan-progress');
+ const fill = document.getElementById('scan-fill');
+ const result = document.getElementById('scan-result');
+ 
+ progress.classList.add('show');
+ fill.style.width = '0%';
+ result.textContent = 'Scanning...';
+ 
+ let pct = 0;
+ const interval = setInterval(() => {
+   pct += Math.random() * 15;
+   if(pct > 100) pct = 100;
+   fill.style.width = pct + '%';
+   
+   if(pct === 100) {
+     clearInterval(interval);
+     setTimeout(() => {
+       progress.classList.remove('show');
+       const clean = Math.random() > 0.1;
+       result.innerHTML = clean ? 
+         '<span style="color:var(--green)">✓ GEEN BEDREIGINGEN GEVONDEN</span>' :
+         '<span style="color:var(--red)">⚠ VERDACHT PATROON GEDETECTEERD</span>';
+       if(!clean) addSyslog('WARN','Verdacht bestand gedetecteerd','warn');
+     }, 300);
+   }
+ }, 100);
+}
+
+/* ===================== WEATHER ===================== */
+function getWeather() {
+ const city = document.getElementById('weather-city').value.trim() || 'Amsterdam';
+ 
+ fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`)
+   .then(r => r.json())
+   .then(geo => {
+     if(!geo.results || !geo.results[0]) throw new Error('Stad niet gevonden');
+     const { latitude, longitude, name, country } = geo.results[0];
+     
+     return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,surface_pressure,visibility`);
+   })
+   .then(r => r.json())
+   .then(data => {
+     const current = data.current;
+     document.querySelector('.weather-temp').textContent = Math.round(current.temperature_2m) + '°';
+     document.querySelector('.weather-desc').textContent = getWeatherDesc(current.weather_code);
+     document.querySelector('.weather-location').textContent = city;
+     document.getElementById('weather-hum').textContent = current.relative_humidity_2m + '%';
+     document.getElementById('weather-wind').textContent = current.wind_speed_10m + ' km/u';
+     document.getElementById('weather-pres').textContent = Math.round(current.surface_pressure) + ' hPa';
+     document.getElementById('weather-vis').textContent = (current.visibility / 1000).toFixed(1) + ' km';
+     
+     addSyslog('INFO',`Weerdata opgehaald: ${city}`,'ok');
+   })
+   .catch(err => {
+     document.querySelector('.weather-desc').textContent = 'Fout: ' + err.message;
+     addSyslog('ERR','Weerdata ophalen mislukt','err');
+   });
+}
+
+function getWeatherDesc(code) {
+ const codes = {
+   0: 'Onbewolkt',
+   1: 'Overwegend helder', 2: 'Gedeeltelijk bewolkt', 3: 'Bewolkt',
+   45: 'Mist', 48: 'Mist met rijp',
+   51: 'Lichte motregen', 53: 'Motregen', 55: 'Dichte motregen',
+   61: 'Lichte regen', 63: 'Regen', 65: 'Zware regen',
+   71: 'Lichte sneeuw', 73: 'Sneeuw', 75: 'Zware sneeuw',
+   95: 'Onweer', 96: 'Onweer met hagel'
+ };
+ return codes[code] || 'Onbekend';
+}
+
+/* ===================== SCREEN FLICKER EFFECT ===================== */
+setInterval(() => {
+ if(Math.random() > 0.95) {
+   document.body.style.filter = 'brightness(1.1)';
+   setTimeout(() => {
+     document.body.style.filter = 'brightness(1)';
+   }, 50);
+ }
+}, 3000);
 </script>
 
 </body>
