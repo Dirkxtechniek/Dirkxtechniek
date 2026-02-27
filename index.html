@@ -193,15 +193,19 @@ padding:6px;
 cursor:pointer;
 }
 .desk-icon:hover .icon-box { border-color:var(–amber); box-shadow:0 0 10px var(–amber-glow); }
-.desk-icon:hover .icon-label {
-color: #ffd700;
+.icon-label {
+color: #ffd700 !important;
 font-size: 0.68rem;
 text-align: center;
 text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 font-weight: bold;
 line-height: 1.25;
 margin-top: 2px;
+display: block !important;
+visibility: visible !important;
+opacity: 1 !important;
 }
+.desk-icon:hover .icon-label { color: #fff0aa !important; }
 .icon-box {
 width:48px;
 height:48px;
