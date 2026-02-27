@@ -349,14 +349,17 @@ color:var(--amber-dim);
 .slog-warn { color:#cc8800; }
 .slog-err { color:#cc4400; }
 
-/* ABOUT */
+/* ABOUT - FIXED ASCII */
 .about-ascii {
-font-family:'VT323',monospace;
-font-size:0.9rem;
+font-family:'Share Tech Mono',monospace;
+font-size:0.7rem;
 color:var(--amber-dim);
-line-height:1.3;
-margin-bottom:12px;
+line-height:1.2;
+margin-bottom:16px;
+white-space:pre;
+overflow-x:auto;
 }
+
 .spec-row { display:flex; gap:8px; color:var(--amber-dim); }
 .spec-key { min-width:100px; color:var(--amber); }
 
@@ -465,6 +468,7 @@ filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
 }
 </style>
 
+<base target="_blank">
 </head>
 <body>
 
@@ -615,13 +619,12 @@ filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9);
      <button class="win-close" onclick="closeWin('win-about')">✕</button>
    </div>
    <div class="win-body">
-     <div class="about-ascii">
-██████╗ ██╗██████╗ ██╗  ██╗██╗  ██╗
+     <pre class="about-ascii">██████╗ ██╗██████╗ ██╗  ██╗██╗  ██╗
 ██╔══██╗██║██╔══██╗██║ ██╔╝╚██╗██╔╝
-██║  ██║██║██████╔╝█████╔╝  ╚███╔╝
-██║  ██║██║██╔══██╗██╔═██╗  ██╔██╗
+██║  ██║██║██████╔╝█████╔╝  ╚███╔╝ 
+██║  ██║██║██╔══██╗██╔═██╗  ██╔██╗ 
 ██████╔╝██║██║  ██║██║  ██╗██╔╝ ██╗
-╚═════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝</div>
+╚═════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝</pre>
      <div class="spec-row"><span class="spec-key">OS</span><span>DIRKX-OS v2.4</span></div>
      <div class="spec-row"><span class="spec-key">KERN</span><span>Metal · Systems · Economy</span></div>
      <div class="spec-row"><span class="spec-key">CLEARANCE</span><span id="about-clearance">STANDARD</span></div>
@@ -943,7 +946,7 @@ if (termIn) {
      case 'boeken': openWin('win-books'); tlog('Bibliotheek geopend.','ok'); break;
      case 'vault': openWin('win-vault'); tlog('Vault geopend.','ok'); break;
      case 'clearance': tlog(`Huidig niveau: ${clearance===0?'STANDARD':clearance===1?'VAULT':'GODMODE'}`); break;
-     case 'contact': tlog('Email: info@dirkxtechniek.nl<br>Zakelijk samenwerken: stuur een bericht.'); break;
+     case 'contact': tlog('Email: dirkxtechniek@gmail.com<br>Zakelijk samenwerken: stuur een bericht.'); break;
      case 'sysinfo': openWin('win-about'); tlog('Systeem info geopend.','ok'); break;
      case 'clear': termOut.innerHTML=''; break;
      case 'easter':
