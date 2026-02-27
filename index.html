@@ -218,11 +218,12 @@ transition:all 0.15s;
 /* WINDOWS */
 .win {
 position:absolute;
-min-width:300px;
-min-height:200px;
+min-width:280px;
+max-width:calc(100vw - 20px);
+min-height:180px;
 background:#0a0800;
 border:1px solid var(–amber-dim);
-box-shadow:0 0 30px rgba(255,176,0,0.08);
+box-shadow:0 0 30px rgba(255,176,0,0.12);
 display:none;
 flex-direction:column;
 z-index:100;
@@ -735,6 +736,15 @@ function openWin(id) {
  if (!w) return;
  w.classList.add('open');
  w.style.zIndex = ++zTop;
+ // Centreer het venster op het scherm
+ const dw = w.offsetWidth || 400;
+ const dh = w.offsetHeight || 280;
+ const vw = window.innerWidth;
+ const vh = window.innerHeight - 36;
+ const left = Math.max(10, Math.min(Math.round((vw - dw) / 2), vw - dw - 10));
+ const top  = Math.max(10, Math.min(Math.round((vh - dh) / 3), vh - dh - 10));
+ w.style.left = left + 'px';
+ w.style.top  = top  + 'px';
  openWindows[id] = true;
  updateTaskbar();
  addSyslog('INFO', `Venster geopend: ${id.replace('win-','')}`, '');
